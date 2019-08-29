@@ -4,6 +4,7 @@ using MicroRabbit.Domain.Core.Events;
 
 namespace MicroRabbit.Domain.Core.Bus
 {
+    //Setting up events
     public interface IEventHandler<in TEvent> : IEventHandler
         where TEvent : Event
     {
