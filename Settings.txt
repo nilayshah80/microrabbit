@@ -1,0 +1,23 @@
+docker run --name rabbitmq -d -p 5672:5672 -p 15672:15672 --hostname rabbitmq rabbitmq:3-management
+docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=Pass@word" -p 1433:1433 --name sql1 -d microsoft/mssql-server-linux:2017-latest
+
+Migration DB
+============
+Banking
+--------
+1. Set Banking.Api microservice as Start up project
+2. In Nuget Package Manager Console set Banking.Data as Default project
+3. Update-Database -Context BankingDbContext
+Transfer
+--------
+1. Set Transfer.Api microservice as Start up project
+2. In Nuget Package Manager Console set Transfer.Data as Default project
+3. Update-Database -Context TransferDbContext
+
+Visual Studio Server Explorer add Both Db under Data Connection
+
+Insert two record into BankingDB.Account Table
+1 Checking 0
+2 Savings 0
+
+Run Banking Api Microservice and Post record with 1, 2, 5.10 -> And Check rabbitMQ queue for 1 queue
